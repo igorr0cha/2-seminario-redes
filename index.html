@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Rede de Computadores - TechLink Corp.</title>
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Ícones (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+/* 1. CONFIGURAÇÃO GERAL */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #e2e8f0; /* Fundo cinza claro */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px 0;
+  font-family: 'Lato', sans-serif;
+  /* Melhora a renderização do texto */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 1.1 CONTAINER DA APRESENTAÇÃO (SLIDER + NAVEGAÇÃO) */
+.presentation-container {
+  width: 1280px; /* Largura padrão de slide 16:9 */
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slider-wrapper {
+  width: 1280px;
+  height: 720px;
+  max-width: 100%;
+  max-height: 56.25vw; /* Mantém proporção 16:9 em telas menores */
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: #FFFFFF;
+  cursor: grab; /* Indica que pode ser arrastado */
+}
+
+.slider-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.4s ease-in-out;
+}
+
+.slide-container {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  position: relative;
+  background-color: #FFFFFF;
+}
+
+/* 1.2 ESTILO DE FUNDO SUTIL */
+.slide-container::before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  /* Gradientes radiais suaves para um fundo elegante */
+  background-image:
+    radial-gradient(circle at 10% 10%, #EBF5FF 10%, transparent 10.5%),
+    radial-gradient(circle at 90% 80%, #E6FFFA 15%, transparent 15.5%);
+  background-position: 0 0;
+  z-index: 0;
+}
+
+.slide-container>* {
+  position: relative;
+  z-index: 1; /* Garante que o conteúdo fique acima do fundo */
+}
+
+/* 1.3 NAVEGAÇÃO (BOTÕES LATERAIS E ÍNDICE INFERIOR) */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #CBD5E1;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  color: #1E3A8A; /* Azul escuro */
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button:hover {
+  background-color: #1E3A8A;
+  color: white;
+}
+
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+#prevBtn {
+  left: 20px;
+}
+
+#nextBtn {
+  right: 20px;
+}
+
+/* Índice inferior (dots) */
+.slide-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #1E3A8A;
+  border-radius: 50%;
+  margin: 0 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.dot.active {
+  background-color: #1E3A8A;
+  transform: scale(1.2);
+}
+
+/* Tooltip (sumário) que aparece ao passar o mouse no dot */
+.dot .tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: 120px;
+  background-color: #1E3A8A;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  font-weight: 700;
+  pointer-events: none; /* Evita que o tooltip bloqueie o clique */
+}
+
+.dot:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+/* 2. TIPOGRAFIA (FONTES AUMENTADAS) */
+.slide-container h1,
+.slide-container h2,
+.slide-container h3 {
+  color: #1E3A8A; /* Azul Escuro (Tema Principal) */
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+}
+
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle,
+.slide-container th,
+.slide-container td {
+  color: #1F2937; /* Cinza Escuro (para texto) */
+  font-family: 'Lato', sans-serif;
+}
+
+/* Tamanhos de Fonte */
+.slide-container h1 {
+  font-size: 70px;
+}
+
+.slide-container .slide-title {
+  /* h2 - Título principal de cada slide */
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: left;
+  width: 100%;
+}
+
+.slide-container h3 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle,
+.slide-container th,
+.slide-container td {
+  font-size: 20px; /* Fonte aumentada */
+  line-height: 1.5;
+}
+
+.slide-container .subtitle {
+  font-weight: 400;
+  margin: 20px auto;
+  font-size: 26px; /* Fonte aumentada */
+  color: #4B5563; /* Cinza médio */
+}
+
+.slide-container .content-area {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
+
+/* 3. DEFINIÇÕES DE LAYOUT (Estilos para cada tipo de slide) */
+
+/* Layout: Title_Slide (Capa) */
+.title-layout {
+  text-align: center;
+}
+
+/* Layout: Section_Title (Título de Seção) */
+.section-title-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.section-title-layout h2 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.section-title-layout p {
+  font-size: 24px;
+  margin: 0 auto;
+  max-width: 700px;
+  color: #4B5563;
+}
+
+.section-title-layout hr {
+  background-color: #10B981; /* Verde (Tema Secundário) */
+  border: none;
+  height: 5px;
+  margin: 30px auto;
+  width: 100px;
+}
+
+/* Layout: Tiled_Text_With_Icons (3 colunas com ícones) */
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+}
+
+.tile {
+  align-items: center;
+  background-color: #EBF5FF; /* Azul bem claro */
+  border-radius: 12px;
+  border: 1px solid #BEE3F8;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+  padding: 30px;
+  text-align: center;
+}
+
+.tile .icon {
+  color: #10B981; /* Verde */
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.tile h3 {
+    font-size: 26px;
+}
+
+.tile p {
+    font-size: 18px;
+}
+
+/* Layout: Styled_Bullet_Points (Lista com ícones) */
+.bullet-list {
+  max-width: 900px;
+  width: 100%;
+}
+
+.bullet-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bullet-list li {
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-left: 40px;
+  position: relative;
+}
+
+.bullet-list i {
+  color: #10B981; /* Verde */
+  font-size: 24px;
+  left: 0;
+  margin-top: 5px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+}
+
+.bullet-list li strong {
+  color: #1E3A8A; /* Azul Escuro */
+  font-weight: 700;
+}
+
+/* Layout: Image_Right_Text_Left (two-column) */
+.two-column {
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+}
+
+.two-column ul {
+  list-style: disc;
+  margin: 0;
+  padding-left: 25px;
+}
+
+.two-column li {
+  margin-bottom: 15px;
+}
+
+/* Estilo específico para a lista de objetivos da empresa (slide 4) */
+.two-column .company-goals ul {
+    list-style: none;
+    padding-left: 0;
+}
+.two-column .company-goals li {
+    padding-left: 40px;
+    position: relative;
+}
+.two-column .company-goals li i {
+    color: #10B981; /* Verde */
+    font-size: 20px;
+    left: 0;
+    margin-top: 6px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+}
+
+/* Wrapper da imagem (para topologia e foto) */
+.image-wrapper {
+  border-radius: 12px;
+  height: 450px;
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #E2E8F0;
+  background-color: #F7FAFC; /* Fundo suave para imagem */
+}
+
+.image-wrapper img {
+  height: 100%;
+  object-fit: contain; /* 'contain' para topologia (não corta) */
+  width: 100%;
+}
+
+.image-wrapper img.cover {
+  object-fit: cover; /* 'cover' para fotos (corta para preencher) */
+}
+
+/* Layout: Table (Tabelas) */
+.table-layout {
+  width: 100%;
+}
+
+.table-layout table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-layout th,
+.table-layout td {
+  border-bottom: 1px solid #E2E8F0;
+  padding: 18px 24px;
+  text-align: left;
+}
+
+.table-layout th {
+  background-color: #EBF5FF; /* Azul claro */
+  color: #1E3A8A;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+}
+
+.table-layout tr:last-child td {
+  border-bottom: none;
+}
+
+.table-layout tr td:last-child,
+.table-layout tr th:last-child {
+    text-align: right;
+}
+
+/* Destaque na linha Total */
+.table-layout tr:last-child {
+    font-weight: 700;
+    background-color: #E6FFFA; /* Verde claro */
+}
+.table-layout tr:last-child td {
+    color: #047857; /* Verde escuro */
+}
+
+/* Layout: Bleed_Image_Right (Imagem que vai até a borda) */
+.slide-container.bleed-image-layout {
+  align-items: start;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: 1fr 1fr;
+  padding: 0; /* Remove padding para a imagem vazar */
+}
+
+.slide-container.bleed-image-layout>.content-container {
+  padding: 60px 0 60px 60px; /* Adiciona padding só no lado do texto */
+}
+
+.slide-container.bleed-image-layout>.image-container {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slide-container.bleed-image-layout img.bleed-image-side {
+  border-radius: 0 8px 8px 0; /* Arredonda só os cantos da direita */
+  height: 100%;
+  max-width: 100%;
+  max-height: 720px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slide-container.bleed-image-layout .bleed-text-side p {
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Layout: Q&A (Slide final) */
+.qa-layout {
+  text-align: center;
+  width: 100%;
+  align-self: center;
+}
+
+.qa-layout h2 {
+  font-size: 80px;
+  margin-bottom: 20px;
+}
+
+.qa-layout p {
+  font-size: 24px;
+  color: #4B5563;
+}
+    </style>
+</head>
+<body>
+
+<!-- O HTML começa aqui -->
+<div class="presentation-container">
+    <div class="slider-wrapper">
+        <div class="slider-track">
+            
+            <!-- Slide 1: Capa (Title_Slide) -->
+            <!-- data-title é usado pelo índice inferior (tooltip) -->
+            <div class="slide-container" data-title="Capa">
+                <div class="title-layout">
+                    <h1>Implantação de Sistema de Informação Corporativo</h1>
+                    <p class="subtitle">Proposta de Projeto de Rede para <strong>TechLink Corp.</strong></p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Equipe (Section_Title) -->
+            <div class="slide-container" data-title="Equipe">
+                <div class="section-title-layout">
+                    <h2>Nossa Equipe</h2>
+                    <hr> <!-- Linha verde decorativa -->
+                    <p>Cristiano, Dante, Ígor e Rafael</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Objetivo (Styled_Bullet_Points) -->
+            <div class="slide-container" data-title="Objetivo">
+                <h2 class="slide-title">Objetivo do Projeto</h2>
+                <div class="content-area">
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-bullseye"></i>Desenvolver a capacidade de analisar cenários reais de implantação de redes (LAN, MAN ou WAN).</li>
+                            <li><i class="fa-solid fa-building"></i>Considerar as necessidades de uma empresa hipotética para propor uma solução de rede.</li>
+                            <li><i class="fa-solid fa-sitemap"></i>Dimensionar os recursos computacionais necessários e estruturar a rede de forma lógica e física.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: A Empresa (two-column) - NOVO SLIDE -->
+            <div class="slide-container" data-title="A Empresa">
+                <h2 class="slide-title">Contexto da Empresa: TechLink Corp.</h2>
+                <div class="content-area">
+                    <div class="two-column">
+                        <!-- Coluna da Esquerda: Texto -->
+                        <div>
+                            <h3>Sobre o Grupo</h3>
+                            <p>A TechLink Corp. é um grupo empresarial do setor de varejo tecnológico com duas lojas interligadas:</p>
+                            <ul>
+                                <li><strong>Loja Matriz (Brasília)</strong></li>
+                                <li><strong>Loja Filial (Goiânia)</strong></li>
+                            </ul>
+                            <h3 style="margin-top: 20px;">O Desafio</h3>
+                            <!-- Lista de objetivos com ícones -->
+                            <div class="company-goals">
+                                <ul>
+                                    <li><i class="fa-solid fa-chart-line"></i>Melhorar a gestão administrativa.</li>
+                                    <li><i class="fa-solid fa-comments"></i>Otimizar a comunicação interna entre as unidades.</li>
+                                    <li><i class="fa-solid fa-shield-halved"></i>Integrar departamentos com uma rede segura e eficiente.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Coluna da Direita: Imagem -->
+                        <div>
+                            <div class="image-wrapper">
+                                <!-- Imagem de um escritório de tecnologia -->
+                                <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfHNlYXJjaHw1fHx0ZWNoJTIwb2ZmaWNlfGVufDB8fHx8MTcyMjAwNzY4MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Escritório de tecnologia moderno" class="cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Requisitos (Tiled_Text_With_Icons) -->
+            <div class="slide-container" data-title="Requisitos">
+                <h2 class="slide-title">O Cenário: Requisitos do Projeto</h2>
+                <div class="content-area">
+                    <div class="tiled-content">
+                        <!-- Tile 1 -->
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-store"></i></div>
+                            <h3>Estrutura</h3>
+                            <p>Mínimo de 2 lojas interligadas (configurando uma MAN) com roteador e protocolo RIP próprio.</p>
+                        </div>
+                        <!-- Tile 2 -->
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-users"></i></div>
+                            <h3>Departamentos</h3>
+                            <p>5 departamentos: Administrativo, Financeiro, Comercial, TI e Atendimento ao Cliente.</p>
+                        </div>
+                        <!-- Tile 3 -->
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-cogs"></i></div>
+                            <h3>Serviços</h3>
+                            <p>Serviços essenciais de DHCP, DNS e HTTP configurados e funcionando em cada unidade.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Tarefas (Tiled_Text_With_Icons) -->
+            <div class="slide-container" data-title="Tarefas">
+                <h2 class="slide-title">Nossas Tarefas</h2>
+                <div class="content-area">
+                    <div class="tiled-content">
+                        <!-- Tile 1 -->
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-list-check"></i></div>
+                            <h3>Levantamento</h3>
+                            <p>Levantar necessidades de usuários, dispositivos (PCs, notebooks, servidores) e serviços (e-mail, banco de dados, ERP/CRM).</p>
+                        </div>
+                        <!-- Tile 2 -->
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+                            <h3>Planejamento</h3>
+                            <p>Planejar a topologia da rede, definir o endereçamento IP e implementar a segmentação por VLANs para os departamentos.</p>
+                        </div>
+                        <!-- Tile 3 -->
+                        <div class="tile">
+                            <div class="icon"><i class="fa-solid fa-tools"></i></div>
+                            <h3>Configuração</h3>
+                            <p>Interligação das lojas (MAN) e configuração dos serviços de DHCP, DNS e HTTP em servidores dedicados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Topologia (two-column) - ATUALIZADO -->
+            <div class="slide-container" data-title="Topologia">
+                <h2 class="slide-title">Topologia da Rede (Lógica e Física)</h2>
+                <div class="content-area">
+                    <div class="two-column">
+                        <!-- Coluna da Esquerda: Texto -->
+                        <div>
+                            <div>
+                                <h3>Topologia Lógica (Diagrama)</h3>
+                                <ul>
+                                    <li>Rede MAN interligando a Matriz (Brasília) e a Filial (Goiânia).</li>
+                                    <li>Segmentação por VLANs para cada um dos 5 departamentos em ambas as lojas.</li>
+                                    <li>Servidores de ADM (VLAN 10) hospedando os serviços de DNS e HTTP.</li>
+                                    <li>Roteamento dinâmico (RIP) configurado para permitir a comunicação da VLAN ADM entre as lojas.</li>
+                                </ul>
+                                <h3 style="margin-top: 20px;">Topologia Física</h3>
+                                <ul>
+                                    <li>Disposição de racks, servidores, switches e cabeamento estruturado em cada localidade.</li>
+                                    <li>Conexão WAN/MAN (link dedicado ou VPN) entre os roteadores de borda das duas lojas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Coluna da Direita: Imagem do Projeto -->
+                        <div>
+                            <div class="image-wrapper">
+                                <!-- Imagem da topologia enviada pelo usuário -->
+                                <img src="http://googleusercontent.com/image_collection/image_retrieval/8043d08e-8fb2-44ff-be4c-183d14cce777" alt="Diagrama da topologia lógica do projeto no Cisco Packet Tracer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8: Segurança (Styled_Bullet_Points) -->
+            <div class="slide-container" data-title="Segurança">
+                <h2 class="slide-title">Plano de Segurança</h2>
+                <div class="content-area">
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-shield-halved"></i><strong>Controle de Acesso:</strong> ACLs (Access Control Lists) para definir e limitar o tráfego de entrada e saída da rede.</li>
+                            <li><i class="fa-solid fa-sitemap"></i><strong>Segmentação:</strong> VLANs para separar departamentos, limitando o tráfego e a propagação de ameaças.</li>
+                            <li><i class="fa-solid fa-users-cog"></i><strong>Autenticação:</strong> Gerenciamento de usuários, níveis de privilégio e permissões para evitar acesso indevido.</li>
+                            <li><i class="fa-solid fa-database"></i><strong>Continuidade:</strong> Implementação de política de backup externo para dados críticos.</li>
+                            <li><i class="fa-solid fa-book-medical"></i><strong>Resposta a Incidentes:</strong> Criação de um Security Playbook como guia para resposta a incidentes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 9: Recursos (Table) -->
+            <div class="slide-container" data-title="Recursos">
+                <h2 class="slide-title">Tabela de Recursos (Dimensionamento por Loja)</h2>
+                <div class="content-area">
+                    <div class="table-layout">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Departamento</th>
+                                    <th>Usuários (Est.)</th>
+                                    <th>Dispositivos (Est.)</th>
+                                    <th>Servidor Dedicado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Administrativo</td>
+                                    <td>10</td>
+                                    <td>15 (PCs, Impressoras)</td>
+                                    <td>Sim (DNS, HTTP, DHCP)</td>
+                                </tr>
+                                <tr>
+                                    <td>Financeiro</td>
+                                    <td>8</td>
+                                    <td>10 (PCs, Impressoras)</td>
+                                    <td>Não</td>
+                                </tr>
+                                <tr>
+                                    <td>Comercial</td>
+                                    <td>15</td>
+                                    <td>20 (PCs, Notebooks)</td>
+                                    <td>Não</td>
+                                </tr>
+                                <tr>
+                                    <td>TI</td>
+                                    <td>5</td>
+                                    <td>10 (PCs, Notebooks)</td>
+                                    <td>Sim (Gerenciamento)</td>
+                                </tr>
+                                <tr>
+                                    <td>Atendimento</td>
+                                    <td>12</td>
+                                    <td>15 (PCs, Telefones IP)</td>
+                                    <td>Não</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 10: Custos (Table) -->
+            <div class="slide-container" data-title="Custos">
+                <h2 class="slide-title">Custos Estimados (Fictício)</h2>
+                <div class="content-area">
+                    <div class="table-layout">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Componente</th>
+                                    <th>Quantidade</th>
+                                    <th>Custo Unit. (R$)</th>
+                                    <th>Custo Total (R$)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Roteador (MAN)</td>
+                                    <td>2</td>
+                                    <td>R$ 5.000,00</td>
+                                    <td>R$ 10.000,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Switch Layer 3</td>
+                                    <td>2</td>
+                                    <td>R$ 3.500,00</td>
+                                    <td>R$ 7.000,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Switch Layer 2</td>
+                                    <td>8</td>
+                                    <td>R$ 1.200,00</td>
+                                    <td>R$ 9.600,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Servidores</td>
+                                    <td>4</td>
+                                    <td>R$ 8.000,00</td>
+                                    <td>R$ 32.000,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Estações de Trabalho</td>
+                                    <td>50</td>
+                                    <td>R$ 2.500,00</td>
+                                    <td>R$ 125.000,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Software e Licenças</td>
+                                    <td>1 (Pacote)</td>
+                                    <td>R$ 20.000,00</td>
+                                    <td>R$ 20.000,00</td>
+                                </tr>
+                                <!-- Linha Total com destaque -->
+                                <tr>
+                                    <td><strong>Total Estimado</strong></td>
+                                    <td><strong>-</strong></td>
+                                    <td><strong>-</strong></td>
+                                    <td><strong>R$ 203.600,00</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Testes (Bleed_Image_Right) -->
+            <div class="slide-container bleed-image-layout" data-title="Testes">
+                <!-- Coluna da Esquerda: Texto -->
+                <div class="content-container">
+                    <h2 class="slide-title">Demonstração e Testes</h2>
+                    <div class="content-area">
+                        <div class="bleed-text-side">
+                            <h3>Testes de Conectividade</h3>
+                            <p>A topologia foi implementada e testada integralmente no simulador Cisco Packet Tracer.</p>
+                            <p>Testes de ping confirmam a comunicação bem-sucedida entre VLANs distintas e, mais importante, entre as duas lojas através da rede MAN.</p>
+                            <p>Os serviços HTTP e DNS estão funcionais. Clientes de Brasília podem acessar o servidor web de Goiânia (e vice-versa) pelo domínio, validando o DNS e o roteamento RIP.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Coluna da Direita: Imagem -->
+                <div class="image-container">
+                    <!-- Imagem de fundo abstrata de servidores -->
+                    <img
+                        class="bleed-image-side"
+                        src="https://images.unsplash.com/photo-1581090464777-f32202518092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfHNlYXJjaHwyMHx8bmV0d29yayUyMHNlcnZlcnxlbnwwfHx8fDE3MjE5OTgxNTV8MA&ixlib=rb-4.0.3&q=80&w=1080"
+                        alt="Abstrato de sala de servidores com luzes azuis">
+                </div>
+            </div>
+
+            <!-- Slide 12: Referências (Section_Title) -->
+            <div class="slide-container" data-title="Referências">
+                <div class="section-title-layout">
+                    <hr>
+                    <h2>Referências Bibliográficas</h2>
+                    <p>Kurose, J. F., & Ross, K. W. (2017). Redes de Computadores e a Internet: Uma Abordagem Top-Down. 6ª ed. Pearson.</p>
+                    <p>Cisco Systems, Inc. (2023). Documentação Oficial do Cisco Packet Tracer.</p>
+                </div>
+            </div>
+
+            <!-- Slide 13: Fim (Q&A) -->
+            <div class="slide-container" data-title="Fim">
+                <div class="qa-layout">
+                    <h2>Obrigado.</h2>
+                    <p>Perguntas?</p>
+                </div>
+            </div>
+
+        </div> <!-- Fim .slider-track -->
+        
+        <!-- Botões de Navegação (Setas) -->
+        <button id="prevBtn" class="nav-button"><i class="fa-solid fa-chevron-left"></i></button>
+        <button id="nextBtn" class="nav-button"><i class="fa-solid fa-chevron-right"></i></button>
+
+    </div> <!-- Fim .slider-wrapper -->
+
+    <!-- Índice de Navegação (Dots) -->
+    <div class="slide-dots">
+        <!-- Os dots serão gerados dinamicamente pelo JavaScript -->
+    </div>
+
+</div> <!-- Fim .presentation-container -->
+
+
+<!-- JavaScript para a funcionalidade do slider -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleciona os elementos principais
+    const track = document.querySelector('.slider-track');
+    const wrapper = document.querySelector('.slider-wrapper');
+    const slides = Array.from(track.children);
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const dotsNav = document.querySelector('.slide-dots');
+    
+    // Verifica se os elementos existem
+    if (!track || slides.length === 0) {
+        console.error('Slider track ou slides não encontrados.');
+        return;
+    }
+
+    let slideWidth = slides[0].getBoundingClientRect().width;
+    let currentSlide = 0;
+    
+    // Variáveis para a funcionalidade de "arrastar" (drag/swipe)
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    // --- 1. CRIAÇÃO DOS DOTS (ÍNDICE) ---
+    slides.forEach((slide, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        
+        // Adicionar tooltip (sumário) com o título do slide
+        const tooltip = document.createElement('span');
+        tooltip.classList.add('tooltip');
+        // Pega o título do atributo 'data-title' do slide
+        tooltip.textContent = slide.dataset.title || `Slide ${index + 1}`;
+        dot.appendChild(tooltip);
+
+        // Adiciona evento de clique no dot
+        dot.addEventListener('click', () => {
+            goToSlide(index);
+        });
+        dotsNav.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsNav.children);
+
+    // --- 2. FUNÇÕES PRINCIPAIS DE NAVEGAÇÃO ---
+    
+    // Função para mover para um slide específico
+    const goToSlide = (slideIndex) => {
+        // Limites (não ir antes do 0 ou depois do último)
+        if (slideIndex < 0) slideIndex = 0;
+        if (slideIndex >= slides.length) slideIndex = slides.length - 1;
+
+        track.style.transition = 'transform 0.4s ease-in-out'; // Garante que a animação CSS está ativa
+        // Move o 'track' para a esquerda
+        track.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        currentSlide = slideIndex;
+        updateNav(); // Atualiza botões e dots
+        
+        // Atualiza posição para o 'drag'
+        currentTranslate = -slideIndex * slideWidth;
+        prevTranslate = currentTranslate;
+    };
+
+    // Função para atualizar o estado dos botões e dots
+    const updateNav = () => {
+        // Atualizar dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+        
+        // Atualizar botões (desativar no início e no fim)
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+    };
+
+    // --- 3. EVENT LISTENERS (BOTÕES) ---
+    nextBtn.addEventListener('click', () => {
+        goToSlide(currentSlide + 1);
+    });
+
+    prevBtn.addEventListener('click', () => {
+        goToSlide(currentSlide - 1);
+    });
+
+    // --- 4. EVENT LISTENERS DE ARRASTAR (DRAG/SWIPE) ---
+    
+    // Computador (mouse)
+    wrapper.addEventListener('mousedown', dragStart);
+    wrapper.addEventListener('mousemove', drag);
+    wrapper.addEventListener('mouseup', dragEnd);
+    wrapper.addEventListener('mouseleave', dragEnd); // Cancela se o mouse sair
+
+    // Mobile (toque)
+    wrapper.addEventListener('touchstart', dragStart, { passive: true });
+    wrapper.addEventListener('touchmove', drag, { passive: true });
+    wrapper.addEventListener('touchend', dragEnd);
+
+    function dragStart(e) {
+        // Ignora o drag se clicar nos botões
+        if (e.target.closest('.nav-button') || e.target.closest('.dot')) return;
+        
+        isDragging = true;
+        startPos = getPositionX(e); // Pega a posição inicial do X
+        track.style.transition = 'none'; // Desativa a animação CSS durante o drag
+        wrapper.style.cursor = 'grabbing'; // Muda o cursor
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+        
+        const currentPosition = getPositionX(e);
+        const move = currentPosition - startPos;
+        currentTranslate = prevTranslate + move;
+        
+        // Limitar o drag para não passar do primeiro/último slide (efeito elástico)
+        const maxTranslate = 0;
+        const minTranslate = -(slides.length - 1) * slideWidth;
+        if (currentTranslate > maxTranslate) currentTranslate = maxTranslate + (currentTranslate - maxTranslate) * 0.2;
+        if (currentTranslate < minTranslate) currentTranslate = minTranslate + (currentTranslate - minTranslate) * 0.2;
+        
+        // Aplica a transformação em tempo real
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function dragEnd(e) {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        wrapper.style.cursor = 'grab'; // Volta o cursor
+        
+        const movedBy = currentTranslate - prevTranslate;
+        const threshold = slideWidth / 4; // Limite para decidir se muda de slide
+
+        // Decide se muda de slide
+        if (movedBy < -threshold && currentSlide < slides.length - 1) {
+            // Arrastou para a esquerda (próximo slide)
+            goToSlide(currentSlide + 1);
+        } else if (movedBy > threshold && currentSlide > 0) {
+            // Arrastou para a direita (slide anterior)
+            goToSlide(currentSlide - 1);
+        } else {
+            // Não arrastou o suficiente, volta ao slide atual
+            goToSlide(currentSlide);
+        }
+    }
+
+    // Função auxiliar para pegar o X (funciona para mouse e toque)
+    function getPositionX(e) {
+        return e.type.includes('touch') ? e.touches[0].clientX : e.pageX;
+    }
+
+    // --- 5. AJUSTE DE RESPONSIVIDADE ---
+    
+    // Ajustar o tamanho ao redimensionar a janela
+    window.addEventListener('resize', () => {
+        // Recalcular a largura do slide e reposicionar
+        const newSlideWidth = slides[0].getBoundingClientRect().width;
+        
+        if(newSlideWidth !== slideWidth && newSlideWidth > 0) {
+            slideWidth = newSlideWidth;
+        }
+        
+        // Reposiciona no slide atual com a nova largura (sem animação)
+        track.style.transition = 'none';
+        goToSlide(currentSlide);
+    });
+
+    // --- 6. INICIALIZAÇÃO ---
+    goToSlide(0); // Garante que o slider comece no primeiro slide
+});
+</script>
+
+</body>
+</html>
+```
