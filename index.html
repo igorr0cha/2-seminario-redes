@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto de Rede de Computadores - TechLink Corp.</title>
-    <!-- Fontes do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Ícones (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -424,17 +422,21 @@ body {
   width: 100%;
 }
 
+/* *** ALTERAÇÃO DE AJUSTE (PARA CABER O TEXTO) *** */
 .table-layout th,
 .table-layout td {
   border-bottom: 1px solid #E2E8F0;
-  padding: 18px 24px;
+  padding: 14px 20px; /* REDUZIDO de 18px 24px */
   text-align: left;
+  font-size: 18px; /* REDUZIDO de 20px */
+  line-height: 1.4;
 }
 
+/* *** ALTERAÇÃO DE AJUSTE (PARA CABER O TEXTO) *** */
 .table-layout th {
   background-color: #EBF5FF; /* Azul claro */
   color: #1E3A8A;
-  font-size: 22px;
+  font-size: 20px; /* REDUZIDO de 22px */
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
 }
@@ -518,13 +520,10 @@ body {
 </head>
 <body>
 
-<!-- O HTML começa aqui -->
 <div class="presentation-container">
     <div class="slider-wrapper">
         <div class="slider-track">
             
-            <!-- Slide 1: Capa (Title_Slide) -->
-            <!-- data-title é usado pelo índice inferior (tooltip) -->
             <div class="slide-container" data-title="Capa">
                 <div class="title-layout">
                     <h1>Implantação de Sistema de Informação Corporativo</h1>
@@ -532,16 +531,13 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 2: Equipe (Section_Title) -->
             <div class="slide-container" data-title="Equipe">
                 <div class="section-title-layout">
                     <h2>Nossa Equipe</h2>
-                    <hr> <!-- Linha verde decorativa -->
-                    <p>Cristiano, Dante, Ígor e Rafael</p>
+                    <hr> <p>Cristiano, Dante, Ígor e Rafael</p>
                 </div>
             </div>
 
-            <!-- Slide 3: Objetivo (Styled_Bullet_Points) -->
             <div class="slide-container" data-title="Objetivo">
                 <h2 class="slide-title">Objetivo do Projeto</h2>
                 <div class="content-area">
@@ -555,12 +551,10 @@ body {
                 </div>
             </div>
             
-            <!-- Slide 4: A Empresa (two-column) - NOVO SLIDE -->
             <div class="slide-container" data-title="A Empresa">
                 <h2 class="slide-title">Contexto da Empresa: TechLink Corp.</h2>
                 <div class="content-area">
                     <div class="two-column">
-                        <!-- Coluna da Esquerda: Texto -->
                         <div>
                             <h3>Sobre o Grupo</h3>
                             <p>A TechLink Corp. é um grupo empresarial do setor de varejo tecnológico com duas lojas interligadas:</p>
@@ -569,7 +563,6 @@ body {
                                 <li><strong>Loja Filial (Goiânia)</strong></li>
                             </ul>
                             <h3 style="margin-top: 20px;">O Desafio</h3>
-                            <!-- Lista de objetivos com ícones -->
                             <div class="company-goals">
                                 <ul>
                                     <li><i class="fa-solid fa-chart-line"></i>Melhorar a gestão administrativa.</li>
@@ -578,10 +571,8 @@ body {
                                 </ul>
                             </div>
                         </div>
-                        <!-- Coluna da Direita: Imagem -->
                         <div>
                             <div class="image-wrapper">
-                                <!-- Imagem de um escritório de tecnologia -->
                                 <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfHNlYXJjaHw1fHx0ZWNoJTIwb2ZmaWNlfGVufDB8fHx8MTcyMjAwNzY4MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Escritório de tecnologia moderno" class="cover">
                             </div>
                         </div>
@@ -589,24 +580,20 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 5: Requisitos (Tiled_Text_With_Icons) -->
             <div class="slide-container" data-title="Requisitos">
                 <h2 class="slide-title">O Cenário: Requisitos do Projeto</h2>
                 <div class="content-area">
                     <div class="tiled-content">
-                        <!-- Tile 1 -->
                         <div class="tile">
                             <div class="icon"><i class="fa-solid fa-store"></i></div>
                             <h3>Estrutura</h3>
                             <p>Mínimo de 2 lojas interligadas (configurando uma MAN) com roteador e protocolo RIP próprio.</p>
                         </div>
-                        <!-- Tile 2 -->
                         <div class="tile">
                             <div class="icon"><i class="fa-solid fa-users"></i></div>
                             <h3>Departamentos</h3>
                             <p>5 departamentos: Administrativo, Financeiro, Comercial, TI e Atendimento ao Cliente.</p>
                         </div>
-                        <!-- Tile 3 -->
                         <div class="tile">
                             <div class="icon"><i class="fa-solid fa-cogs"></i></div>
                             <h3>Serviços</h3>
@@ -616,24 +603,20 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 6: Tarefas (Tiled_Text_With_Icons) -->
             <div class="slide-container" data-title="Tarefas">
                 <h2 class="slide-title">Nossas Tarefas</h2>
                 <div class="content-area">
                     <div class="tiled-content">
-                        <!-- Tile 1 -->
                         <div class="tile">
                             <div class="icon"><i class="fa-solid fa-list-check"></i></div>
                             <h3>Levantamento</h3>
                             <p>Levantar necessidades de usuários, dispositivos (PCs, notebooks, servidores) e serviços (e-mail, banco de dados, ERP/CRM).</p>
                         </div>
-                        <!-- Tile 2 -->
                         <div class="tile">
                             <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
                             <h3>Planejamento</h3>
                             <p>Planejar a topologia da rede, definir o endereçamento IP e implementar a segmentação por VLANs para os departamentos.</p>
                         </div>
-                        <!-- Tile 3 -->
                         <div class="tile">
                             <div class="icon"><i class="fa-solid fa-tools"></i></div>
                             <h3>Configuração</h3>
@@ -643,12 +626,10 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 7: Topologia (two-column) - ATUALIZADO -->
             <div class="slide-container" data-title="Topologia">
                 <h2 class="slide-title">Topologia da Rede (Lógica e Física)</h2>
                 <div class="content-area">
                     <div class="two-column">
-                        <!-- Coluna da Esquerda: Texto -->
                         <div>
                             <div>
                                 <h3>Topologia Lógica (Diagrama)</h3>
@@ -665,18 +646,71 @@ body {
                                 </ul>
                             </div>
                         </div>
-                        <!-- Coluna da Direita: Imagem do Projeto -->
                         <div>
                             <div class="image-wrapper">
-                                <!-- Imagem da topologia enviada pelo usuário -->
-                                <img src="http://googleusercontent.com/image_collection/image_retrieval/8043d08e-8fb2-44ff-be4c-183d14cce777" alt="Diagrama da topologia lógica do projeto no Cisco Packet Tracer">
+                                <img src="topologia.png" alt="Diagrama da topologia lógica do projeto no Cisco Packet Tracer">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--
+            <div class="slide-container" data-title="IPs">
+                <h2 class="slide-title">Plano de Endereçamento IP (VLANs)</h2>
+                <div class="content-area">
+                    <div class="table-layout">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>VLAN ID</th>
+                                    <th>Departamento</th>
+                                    <th>Rede (Ex: Loja Matriz)</th>
+                                    <th>Gateway</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10</td>
+                                    <td>TI / Servidores</td>
+                                    <td>192.168.10.0 /24</td>
+                                    <td>192.168.10.1</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>Administrativo</td>
+                                    <td>192.168.20.0 /24</td>
+                                    <td>192.168.20.1</td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>Financeiro</td>
+                                    <td>192.168.30.0 /24</td>
+                                    <td>192.168.30.1</td>
+                                </tr>
+                                <tr>
+                                    <td>40</td>
+                                    <td>Atendimento</td>
+                                    <td>192.168.40.0 /24</td>
+                                    <td>192.168.40.1</td>
+                                </tr>
+                                <tr>
+                                    <td>50</td>
+                                    <td>Comercial</td>
+                                    <td>192.168.50.0 /24</td>
+                                    <td>192.168.50.1</td>
+                                </tr>
+                                <tr>
+                                    <td>100</td>
+                                    <td>Link WAN (Matriz-Filial)</td>
+                                    <td>10.0.0.0 /30</td>
+                                    <td>N/A</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
 
-            <!-- Slide 8: Segurança (Styled_Bullet_Points) -->
             <div class="slide-container" data-title="Segurança">
                 <h2 class="slide-title">Plano de Segurança</h2>
                 <div class="content-area">
@@ -692,7 +726,6 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 9: Recursos (Table) -->
             <div class="slide-container" data-title="Recursos">
                 <h2 class="slide-title">Tabela de Recursos (Dimensionamento por Loja)</h2>
                 <div class="content-area">
@@ -700,42 +733,34 @@ body {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Departamento</th>
-                                    <th>Usuários (Est.)</th>
-                                    <th>Dispositivos (Est.)</th>
-                                    <th>Servidor Dedicado</th>
+                                    <th>Departamento / Item</th>
+                                    <th>Quantitativo (por Loja)</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>TI (Sala de Servidores)</td>
+                                    <td>4 Servidores, 2 PCs</td>
+                                </tr>
+                                <tr>
                                     <td>Administrativo</td>
-                                    <td>10</td>
-                                    <td>15 (PCs, Impressoras)</td>
-                                    <td>Sim (DNS, HTTP, DHCP)</td>
+                                    <td>3 PCs, 2 Notebooks</td>
                                 </tr>
                                 <tr>
                                     <td>Financeiro</td>
-                                    <td>8</td>
-                                    <td>10 (PCs, Impressoras)</td>
-                                    <td>Não</td>
-                                </tr>
-                                <tr>
-                                    <td>Comercial</td>
-                                    <td>15</td>
-                                    <td>20 (PCs, Notebooks)</td>
-                                    <td>Não</td>
-                                </tr>
-                                <tr>
-                                    <td>TI</td>
-                                    <td>5</td>
-                                    <td>10 (PCs, Notebooks)</td>
-                                    <td>Sim (Gerenciamento)</td>
+                                    <td>3 PCs, 1 Notebook, 1 Impressora</td>
                                 </tr>
                                 <tr>
                                     <td>Atendimento</td>
-                                    <td>12</td>
-                                    <td>15 (PCs, Telefones IP)</td>
-                                    <td>Não</td>
+                                    <td>2 PCs, 2 Notebooks, 2 Smartphones, 1 Access Point</td>
+                                </tr>
+                                <tr>
+                                    <td>Comercial</td>
+                                    <td>2 PCs, 2 Notebooks, 1 Impressora</td>
+                                </tr>
+                                <tr style="background-color: #EBF5FF; font-weight: 700;">
+                                    <td>Infraestrutura de Rede</td>
+                                    <td>1 Roteador, 7 Switches</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -743,16 +768,15 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 10: Custos (Table) -->
             <div class="slide-container" data-title="Custos">
-                <h2 class="slide-title">Custos Estimados (Fictício)</h2>
+                <h2 class="slide-title">Custos Estimados (Fictício - Total 2 Lojas)</h2>
                 <div class="content-area">
                     <div class="table-layout">
                         <table>
                             <thead>
                                 <tr>
                                     <th>Componente</th>
-                                    <th>Quantidade</th>
+                                    <th>Quantidade (Total)</th>
                                     <th>Custo Unit. (R$)</th>
                                     <th>Custo Total (R$)</th>
                                 </tr>
@@ -765,28 +789,52 @@ body {
                                     <td>R$ 10.000,00</td>
                                 </tr>
                                 <tr>
-                                    <td>Switch Layer 3</td>
+                                    <td>Switch Layer 3 (Core)</td>
                                     <td>2</td>
                                     <td>R$ 3.500,00</td>
                                     <td>R$ 7.000,00</td>
                                 </tr>
                                 <tr>
-                                    <td>Switch Layer 2</td>
-                                    <td>8</td>
+                                    <td>Switch Layer 2 (Acesso)</td>
+                                    <td>12</td>
                                     <td>R$ 1.200,00</td>
-                                    <td>R$ 9.600,00</td>
+                                    <td>R$ 14.400,00</td>
                                 </tr>
                                 <tr>
                                     <td>Servidores</td>
-                                    <td>4</td>
+                                    <td>8</td>
                                     <td>R$ 8.000,00</td>
-                                    <td>R$ 32.000,00</td>
+                                    <td>R$ 64.000,00</td>
                                 </tr>
                                 <tr>
-                                    <td>Estações de Trabalho</td>
-                                    <td>50</td>
+                                    <td>PCs (Estações de Trabalho)</td>
+                                    <td>24</td>
                                     <td>R$ 2.500,00</td>
-                                    <td>R$ 125.000,00</td>
+                                    <td>R$ 60.000,00</td>
+                                </tr>
+                                <tr>
+                                    <td>Notebooks</td>
+                                    <td>14</td>
+                                    <td>R$ 2.500,00</td>
+                                    <td>R$ 35.000,00</td>
+                                </tr>
+                                 <tr>
+                                    <td>Impressoras</td>
+                                    <td>4</td>
+                                    <td>R$ 800,00</td>
+                                    <td>R$ 3.200,00</td>
+                                </tr>
+                                 <tr>
+                                    <td>Access Points</td>
+                                    <td>2</td>
+                                    <td>R$ 600,00</td>
+                                    <td>R$ 1.200,00</td>
+                                </tr>
+                                 <tr>
+                                    <td>Smartphones (Corporativos)</td>
+                                    <td>4</td>
+                                    <td>R$ 1.500,00</td>
+                                    <td>R$ 6.000,00</td>
                                 </tr>
                                 <tr>
                                     <td>Software e Licenças</td>
@@ -794,12 +842,11 @@ body {
                                     <td>R$ 20.000,00</td>
                                     <td>R$ 20.000,00</td>
                                 </tr>
-                                <!-- Linha Total com destaque -->
                                 <tr>
                                     <td><strong>Total Estimado</strong></td>
                                     <td><strong>-</strong></td>
                                     <td><strong>-</strong></td>
-                                    <td><strong>R$ 203.600,00</strong></td>
+                                    <td><strong>R$ 220.800,00</strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -807,9 +854,7 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 11: Testes (Bleed_Image_Right) -->
-            <div class="slide-container bleed-image-layout" data-title="Testes">
-                <!-- Coluna da Esquerda: Texto -->
+            <div class="slide-container" data-title="Testes">
                 <div class="content-container">
                     <h2 class="slide-title">Demonstração e Testes</h2>
                     <div class="content-area">
@@ -821,17 +866,23 @@ body {
                         </div>
                     </div>
                 </div>
-                <!-- Coluna da Direita: Imagem -->
-                <div class="image-container">
-                    <!-- Imagem de fundo abstrata de servidores -->
-                    <img
-                        class="bleed-image-side"
-                        src="https://images.unsplash.com/photo-1581090464777-f32202518092?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjAzNTV8MHwxfHNlYXJjaHwyMHx8bmV0d29yayUyMHNlcnZlcnxlbnwwfHx8fDE3MjE5OTgxNTV8MA&ixlib=rb-4.0.3&q=80&w=1080"
-                        alt="Abstrato de sala de servidores com luzes azuis">
+            
+            </div>
+
+            <div class="slide-container" data-title="Vídeo Testes">
+                <h2 class="slide-title">Demonstração: Testes de Conectividade</h2>
+                <div class="content-area" style="flex-direction: column; justify-content: center;">
+                    <p style="font-size: 20px; margin-bottom: 20px; text-align: center;">Teste de ping entre lojas e acesso aos serviços (DNS, HTTP).</p>
+                    
+                    <video controls style="width: 80%; max-width: 900px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                        <source src="seminario-video-testes.mp4" type="video/mp4">
+                        Seu navegador não suporta a tag de vídeo.
+                    </video>
                 </div>
             </div>
 
-            <!-- Slide 12: Referências (Section_Title) -->
+            
+
             <div class="slide-container" data-title="Referências">
                 <div class="section-title-layout">
                     <hr>
@@ -841,7 +892,6 @@ body {
                 </div>
             </div>
 
-            <!-- Slide 13: Fim (Q&A) -->
             <div class="slide-container" data-title="Fim">
                 <div class="qa-layout">
                     <h2>Obrigado.</h2>
@@ -849,24 +899,13 @@ body {
                 </div>
             </div>
 
-        </div> <!-- Fim .slider-track -->
-        
-        <!-- Botões de Navegação (Setas) -->
-        <button id="prevBtn" class="nav-button"><i class="fa-solid fa-chevron-left"></i></button>
+        </div> <button id="prevBtn" class="nav-button"><i class="fa-solid fa-chevron-left"></i></button>
         <button id="nextBtn" class="nav-button"><i class="fa-solid fa-chevron-right"></i></button>
 
-    </div> <!-- Fim .slider-wrapper -->
+    </div> <div class="slide-dots">
+        </div>
 
-    <!-- Índice de Navegação (Dots) -->
-    <div class="slide-dots">
-        <!-- Os dots serão gerados dinamicamente pelo JavaScript -->
-    </div>
-
-</div> <!-- Fim .presentation-container -->
-
-
-<!-- JavaScript para a funcionalidade do slider -->
-<script>
+</div> <script>
 document.addEventListener('DOMContentLoaded', () => {
     // Seleciona os elementos principais
     const track = document.querySelector('.slider-track');
@@ -917,6 +956,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Função para mover para um slide específico
     const goToSlide = (slideIndex) => {
+        // Recalcular a largura do slide (importante para resize)
+        slideWidth = slides[0].getBoundingClientRect().width;
+        if (slideWidth === 0 && slides.length > 0) {
+             // Tenta de novo se a largura for 0 (pode acontecer no load)
+            slideWidth = slides[0].getBoundingClientRect().width;
+        }
+
         // Limites (não ir antes do 0 ou depois do último)
         if (slideIndex < 0) slideIndex = 0;
         if (slideIndex >= slides.length) slideIndex = slides.length - 1;
@@ -1037,10 +1083,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 6. INICIALIZAÇÃO ---
-    goToSlide(0); // Garante que o slider comece no primeiro slide
+    // Pequeno atraso para garantir que a largura do slide seja calculada corretamente
+    setTimeout(() => {
+        goToSlide(0); // Garante que o slider comece no primeiro slide
+    }, 100);
 });
 </script>
 
 </body>
 </html>
-```
